@@ -1,0 +1,23 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<form
+  action="/data"
+  style="width: 50vw; margin: auto"
+  class="needs-validation"
+  novalidate
+>
+  <div class="mb-3 mt-5">
+    <label for="PRN" class="form-label">Enter the PRN : </label>
+    <input
+      type="text"
+      class="form-control"
+      id="PRN"
+      name="PRN"
+      pattern="\d{16}"
+      title="Enter exect 16 digit of prn number"
+      required
+    />
+    <div class="invalid-feedback">plese enter exect 16 digits!</div>
+  </div>
+
+  <button type="submit" class="btn btn-secondary">Submit</button>
+</form>

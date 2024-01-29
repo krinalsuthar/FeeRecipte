@@ -1,0 +1,177 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<!-- <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> -->
+<!-- <div class="navbar-nav">
+        <a class="nav-link" href="/listing">Explore</a>
+      </div> -->
+<!-- <div class="navbar-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/add" class="nav-link">AddNew Data</a>
+        <a href="/add/<%= result._id %>" class="nav-link">Generate Receipt</a>
+        <a href="/logout" class="nav-link">Edit Data</a>
+      </div>
+    </div>
+  </div>
+</nav> -->
+
+<!-- <form action="/data">
+  <div class="mb-3">
+    <label for="PRN" class="form-label">Entter the PRN : </label>
+    <input
+      type="number"
+      class="form-control"
+      id="PRN"
+      name="PRN"
+      pattern="\d{16}"
+      title="Enter exect 16 digit of prn number"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form> -->
+
+<div class="container" id="print">
+  <div class="header">
+    <div class="img">
+      <img
+        src="https://spu.ac.in/wp-content/uploads/2020/10/logo.png"
+        alt="#"
+      />
+    </div>
+    <div class="text">
+      <h3>SANKALCHAND PATEL COLLEGE OF ENGINEERING</h3>
+      <h3 class="center">VISNAGER-384315.</h3>
+    </div>
+  </div>
+  <div class="main mb-5">
+    <div class="heading">
+      <h2 class="center">FEE RECEIPT</h2>
+    </div>
+    <div class="stufentInfo ms-6">
+      <div class="row mt-3">
+        <p class="col">No. :</p>
+        <p class="col">Date : <%= new Date().toLocaleDateString('hi-IN')%></p>
+      </div>
+      <div class="row">
+        <p class="col">Name :</p>
+        <p class="col">Programme :</p>
+      </div>
+      <div class="row">
+        <p class="col">Branch :</p>
+        <p class="col">Sem :</p>
+      </div>
+      <div class="row">
+        <p class="col">PRN :</p>
+        <p class="col">Acedumic Year :</p>
+      </div>
+    </div>
+    <div class="fees">
+      <table class="table table-bordered border-dark">
+        <tr>
+          <th>PARTICULARS</th>
+          <th>AMOUNT</th>
+        </tr>
+        <tr>
+          <td>Tution Fee</td>
+          <td>00.00</td>
+        </tr>
+        <tr>
+          <td>E-Suvidha Fee</td>
+          <td>00.00</td>
+        </tr>
+        <tr>
+          <td>Student Welfare Fee</td>
+          <td>00.00</td>
+        </tr>
+        <tr>
+          <td>Examination Fee</td>
+          <td>00.00</td>
+        </tr>
+        <tr>
+          <td>Alumni Fee</td>
+          <td>00.00</td>
+        </tr>
+        <tr>
+          <td>Convogation Fee</td>
+          <td>00.00</td>
+        </tr>
+        <tr>
+          <td><b>Total Fee</b></td>
+          <td><b>00.00</b></td>
+        </tr>
+      </table>
+    </div>
+    <div class="details">
+      <div class="detail">
+        <p>Rupess in words:</p>
+        <p>Mode of payment :</p>
+        <p>detail :</p>
+        <p>Date : <%= new Date().toLocaleDateString('hi-IN') %></p>
+      </div>
+      <div class="seal">SEAL</div>
+    </div>
+  </div>
+  <p style="text-align: center">
+    <b>NOTE :- this receipt must be carefully preserved.</b>
+  </p>
+</div>
+<div class="button">
+  <!-- <div class="mb-3 d-grid gap-2 col-6 mx-auto">
+    <a download="home.ejs" href="">
+      <button type="submit" onclick="downloadPage()" class="btn btn-secondary">
+        Download receipt
+      </button>
+    </a>
+  </div> -->
+  <div class="mb-3 d-grid gap-2 col-6 mx-auto">
+    <button
+      type="submit"
+      id="printButton"
+      onclick="printCertificate()"
+      class="btn btn-secondary"
+    >
+      Print receipt
+    </button>
+  </div>
+</div>
+<script>
+  function printCertificate() {
+    const printContents = document.getElementById("print").innerHTML;
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
+
+  //   function handlePrintButtonClick() {
+  //     // Trigger the print action
+  //     window.print();
+  //   }
+
+  //   // Attach the function to the button click event
+  //   document
+  //     .getElementById("printButton")
+  //     .addEventListener("click", handlePrintButtonClick);
+  //   function printDiv() {
+  //     var divContents = document.getElementById("print").innerHTML;
+  //     var a = window.open("");
+  //     // a.document.write("<html>");
+  //     //   a.document.write("<body > <h1>Div contents are <br>");
+  //     a.document.write(divContents);
+  //     // a.document.write("</body></html>");
+  //     a.document.close();
+  //     a.print();
+  //   }
+</script>

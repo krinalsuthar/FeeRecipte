@@ -1,0 +1,195 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<!-- <form action="/">
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label"
+      >Entter the PRN :
+    </label>
+    <input
+      type="number"
+      class="form-control"
+      id="exampleInputPassword1"
+      pattern="\d{16}"
+      title="Enter exect 16 digit of prn number"
+      required
+    />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form> -->
+
+<div class="container">
+  <div class="header">
+    <div class="img">
+      <img
+        src="https://spu.ac.in/wp-content/uploads/2020/10/logo.png"
+        alt="#"
+      />
+    </div>
+    <div class="text">
+      <h2>SANKALCHAND PATEL COLLEGE OF ENGINEERING</h2>
+      <h2 class="center">VISNAGER-384315.</h2>
+    </div>
+  </div>
+  <div class="main mb-5">
+    <div class="heading">
+      <h2 class="center">FEE RECEIPT</h2>
+    </div>
+    <div class="stufentInfo ms-6">
+      <div class="row mt-3">
+        <p class="col">No. : 001</p>
+        <p class="col" id="date">
+          Date : <%= new Date().toLocaleDateString('hi-IN') %>
+        </p>
+      </div>
+      <div class="row">
+        <p class="col">Name : <%= result.name %></p>
+        <p class="col">Programme : <%= result.program %></p>
+      </div>
+      <div class="row">
+        <p class="col">Branch : <%= result.branch%></p>
+        <p class="col">Sem : <%= result.sem %><sup>th</sup></p>
+      </div>
+      <div class="row">
+        <p class="col">PRN : <%= result.PRN %></p>
+        <p class="col">Acedumic Year : 2023-24</p>
+      </div>
+    </div>
+    <form action="/new/<%= result._id %>" method="post">
+      <div class="mb-3 mt-5" style="display: none">
+        <label for="PRN" class="form-label">Enter the PRN : </label>
+        <input
+          type="text"
+          class="form-control"
+          id="PRN"
+          name="PRN"
+          value="<%= result.PRN %>"
+        />
+        <div class="invalid-feedback">plese enter exect 16 digits!</div>
+      </div>
+      <div class="fees">
+        <table class="table table-bordered border-dark">
+          <tr>
+            <th>PARTICULARS</th>
+            <th>AMOUNT</th>
+          </tr>
+          <tr>
+            <td><label for="tf" class="form-label">Tution Fee</label></td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                id="tf"
+                name="Tution_Fees"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="ef" class="form-label">E-Suvidha Fee</label></td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                id="ef"
+                name="E_suvidha_Fees"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="wf" class="form-label">Student Welfare Fee</label>
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                id="wf"
+                name="StudentWelfare_Fees"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="ef" class="form-label">Examination_Fees</label>
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                id="ef"
+                name="Examination_Fees"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="ef" class="form-label">Alumni Fee</label>
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                id="ef"
+                name="Alumni_Fees"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label for="ef" class="form-label">Convogation Fee</label>
+            </td>
+            <td>
+              <input
+                type="number"
+                class="form-control"
+                id="ef"
+                name="Convocation_Fees"
+                required
+              />
+            </td>
+          </tr>
+          <!-- <tr>
+            <td><b>Total Fee</b></td>
+            <td><b>31900.00</b></td>
+          </tr> -->
+        </table>
+      </div>
+      <div class="details">
+        <div class="detail">
+          <!-- <p>Rupess in words: Thirty one thousand nine hundered rupees only</p> -->
+          <div class="mb-3">
+            <p>Mode of payment :</p>
+            <select
+              class="form-select"
+              name="pyment_mode"
+              aria-label="Default select example"
+            >
+              <option selected>Mode of payment</option>
+              <option value="cash">Cash</option>
+              <option value="online">Online</option>
+              <option value="cheque">Cheque</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="detail" class="form-label">Enter the Detail : </label>
+            <input type="text" class="form-control" id="detail" name="detail" />
+          </div>
+          <p>Date : <%= new Date().toLocaleDateString('hi-IN') %></p>
+        </div>
+        <div class="seal">SEAL</div>
+      </div>
+      <div class="mb-3 d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-secondary">
+          Generate receipt
+        </button>
+      </div>
+    </form>
+  </div>
+  <p style="text-align: center">
+    <b>NOTE :- this receipt must be carefully preserved.</b>
+  </p>
+</div>

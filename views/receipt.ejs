@@ -1,0 +1,207 @@
+<% layout("/layouts/boilerplate.ejs")%>
+<style>
+  /* body {
+    margin: 0;
+    padding: 0;
+  } */
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 30px 100px;
+  }
+  .center {
+    text-align: center;
+  }
+  .container {
+    margin: 30px 100px;
+    border: 2px solid black;
+  }
+  .heading {
+    background-color: rgb(226, 217, 217);
+    padding: 10px 0px;
+    border-bottom: 2px solid black;
+  }
+  .main {
+    border: 2px solid black;
+    margin: 0px 100px;
+  }
+  h2 {
+    margin: 0px;
+  }
+  .flex {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
+  .flex p {
+    margin: 0px 20px;
+  }
+  .row p {
+    margin-left: 120px;
+  }
+  .details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  .seal {
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+    text-align: center;
+  }
+  .navbar {
+    height: 5rem;
+    background-color: gainsboro;
+    font-size: 1.5rem;
+    border-bottom: 2px solid black !important;
+  }
+  .navbar-nav a {
+    margin: 0px 30px;
+  }
+  .navbar-nav a:hover {
+    border-bottom: 2px solid black;
+  }
+  .btn {
+    text-align: center;
+    margin: auto;
+  }
+  /* .button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+} */
+  @media print {
+    .container {
+      overflow: scroll;
+      display: block;
+    }
+    .header img {
+      width: 150px;
+      margin-right: 20px;
+    }
+    .text h3 {
+      font-size: 0.9rem;
+    }
+    .pb_after {
+      page-break-after: always !important;
+    }
+  }
+</style>
+<div class="container" id="print">
+  <div class="header">
+    <div class="img">
+      <img
+        src="https://spu.ac.in/wp-content/uploads/2020/10/logo.png"
+        alt="#"
+      />
+    </div>
+    <div class="text">
+      <h4>SANKALCHAND PATEL COLLEGE OF ENGINEERING</h4>
+      <h4 class="center">VISNAGER-384315.</h4>
+    </div>
+  </div>
+  <div class="main mb-5">
+    <div class="heading">
+      <h2 class="center">FEE RECEIPT</h2>
+    </div>
+    <div class="stufentInfo ms-6">
+      <div class="row mt-3">
+        <p class="col">No. : 001</p>
+        <p class="col" id="date">
+          Date : <%= new Date().toLocaleDateString('hi-IN') %>
+        </p>
+      </div>
+      <% data.referance.forEach(function(item) { %>
+      <div class="row">
+        <p class="col">Name : <%=item.name %></p>
+        <p class="col">Programme : <%= item.program %></p>
+      </div>
+      <div class="row">
+        <p class="col">Branch : <%= item.branch%></p>
+        <p class="col">Sem : <%= item.sem %><sup>th</sup></p>
+      </div>
+      <div class="row">
+        <p class="col">PRN : <%= item.PRN %></p>
+        <p class="col">Acedumic Year : 2023-24</p>
+      </div>
+      <% }); %>
+      <div class="fees">
+        <table class="table table-bordered border-dark">
+          <tr>
+            <th>PARTICULARS</th>
+            <th>AMOUNT</th>
+          </tr>
+          <tr>
+            <td>Tution Fee</td>
+            <td><%= result.Tution_Fees.toLocaleString("en-IN") %></td>
+          </tr>
+          <tr>
+            <td>E-Suvidha Fee</td>
+            <td><%= result.E_suvidha_Fees.toLocaleString("en-IN") %></td>
+          </tr>
+          <tr>
+            <td>Student Welfare Fee</td>
+            <td><%= result.StudentWelfare_Fees.toLocaleString("en-IN") %></td>
+          </tr>
+          <tr>
+            <td>Examination Fee</td>
+            <td><%= result.Examination_Fees.toLocaleString("en-IN") %></td>
+          </tr>
+          <tr>
+            <td>Alumni Fee</td>
+            <td><%= result.Alumni_Fees.toLocaleString("en-IN") %></td>
+          </tr>
+          <tr>
+            <td>Convogation Fee</td>
+            <td><%= result.Convocation_Fees.toLocaleString("en-IN") %></td>
+          </tr>
+          <tr>
+            <td><b>Total Fee</b></td>
+            <td><b><%= result.Total.toLocaleString("en-IN") %></b></td>
+          </tr>
+        </table>
+      </div>
+      <div class="details">
+        <div class="detail">
+          <p>Rupess in words: <%= amountInWords %></p>
+          <p>Mode of payment : <%= result.pyment_mode %></p>
+          <p>detail :<%= result.detail %></p>
+          <p>Date : <%= new Date().toLocaleDateString('hi-IN') %></p>
+        </div>
+        <div class="seal">SEAL</div>
+      </div>
+    </div>
+    <p style="text-align: center">
+      <b>NOTE :- this receipt must be carefully preserved.</b>
+    </p>
+  </div>
+</div>
+<div class="button">
+  <!-- <div class="mb-3 d-grid gap-2 col-6 mx-auto">
+    <button type="submit" class="btn btn-secondary">Download receipt</button>
+  </div> -->
+  <div class="mb-3 d-grid gap-2 col-6 mx-auto">
+    <button
+      type="submit"
+      id="printButton"
+      onclick="printCertificate()"
+      class="btn btn-secondary"
+    >
+      Print receipt
+    </button>
+  </div>
+</div>
+<script>
+  function printCertificate() {
+    const printContents = document.getElementById("print").innerHTML;
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
+</script>
